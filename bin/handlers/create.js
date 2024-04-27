@@ -9,14 +9,6 @@ let namespace = null;
 let clusterName = null;
 let framework = null;
 
-// Function to create a readline interface
-const createReadlineInterface = () => {
-  return readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-};
-
 const createService = async (sn) => {
   serviceName = sn;
   awsAccount = await askQuestion(createQuestions.awsAccount);

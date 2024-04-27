@@ -1,4 +1,4 @@
-{ "name": "niyo-cli",
+{ "name": "niyo-cli-t",
   "version": "1.0.0",
   "description": "A command line tool to fascilitate the process of repo creation and resource creation.",
   "main": "bin/index.js",
