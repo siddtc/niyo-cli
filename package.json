@@ -1,5 +1,4 @@
-{
-  "name": "niyo-cli",
+{ "name": "niyo-cli",
   "version": "1.0.0",
   "description": "A command line tool to fascilitate the process of repo creation and resource creation.",
   "main": "bin/index.js",
@@ -18,5 +17,9 @@
   "dependencies": {
     "commander": "^12.0.0",
     "figlet": "^1.7.0"
+  },
+  "repository":{
+    "type":"git",
+    "url":"https://github.com/siddtc/niyo-cli.git"
   }
 }
