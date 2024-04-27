@@ -1,0 +1,22 @@
+{
+  "name": "niyo-cli",
+  "version": "1.0.0",
+  "description": "A command line tool to fascilitate the process of repo creation and resource creation.",
+  "main": "bin/index.js",
+  "bin": {
+    "niyo": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "npx prettier . --write"
+  },
+  "keywords": [
+    "niyo"
+  ],
+  "author": "Siddharth Arora",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^12.0.0",
+    "figlet": "^1.7.0"
+  }
+}
