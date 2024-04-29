@@ -8,3 +8,6 @@ module.exports = {
   frameworks:FRAMEWORKS,
   repoURL
 };
+
+
+appName := GetDefaultValueFromContext(ctx, config.AppName) || "$ServiceName"
