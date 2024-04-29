@@ -35,7 +35,27 @@ const runCommand = async (command) => {
   });
 };
 
+const validateOption = (input, length) => {
+  if (input < 0 || input > length) {
+    console.log(
+      "Please enter a valid number, currently you entered",
+      input,
+      "\n\n"
+    );
+    process.exit(1);
+  }
+  return true;
+}
+
+const addEmptyLines = (lines = 1) => {
+  for (let i = 0; i < lines; i++) {
+    console.log("\n");
+  }
+}
+
 module.exports = {
   askQuestion,
-  runCommand
+  runCommand,
+  validateOption,
+  addEmptyLines
 };

@@ -1,11 +1,11 @@
 const { askQuestion, runCommand } = require("../utils");
-const { createQuestions } = require("../common");
+const { createQuestions, commonQuestions } = require("../common");
 const { awsAccounts, frameworks } = require("../config");
 const { buildProject } = require("../repo-builder")
 const location = process.cwd();
 let serviceName = null;
 
-const addServiceName = async () => {
+const addApplicationName = async () => {
   await runCommand(`cd ${location}/${serviceName} && find . -type f -exec sed -i 's/$ServiceName/${serviceName}/g' {} +`)
 }
 
@@ -23,7 +23,7 @@ const createService = async (sn) => {
   awsAccount = await askQuestion(createQuestions.awsAccount);
   clusterName = await askQuestion(createQuestions.clusterName);
   namespace = await askQuestion(createQuestions.namespace);
-  framework = await askQuestion(createQuestions.framework);
+  framework = await askQuestion(commonQuestions.framework);
 
   console.log("\n Please confirm the following details :- \n");
   console.log("Service Name =>", serviceName);
@@ -32,7 +32,7 @@ const createService = async (sn) => {
   console.log("Namespace =>", namespace);
   console.log("Framework =>", frameworks[framework - 1], "\n\n");
 
-  let yn = await askQuestion(createQuestions.yn);
+  let yn = await askQuestion(commonQuestions.yn);
 
   if (
     yn == "n" ||
@@ -59,7 +59,7 @@ const createService = async (sn) => {
   }
 
   await buildProject(serviceName, framework);
-  await addServiceName();
+  await addApplicationName();
   await addNamespace(namespace);
   console.log("Your Repository has been created.")
   process.exit(1)

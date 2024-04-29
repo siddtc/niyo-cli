@@ -1,23 +1,46 @@
 #! /usr/bin/env node
 
-const { awsAccounts, frameworks } = require("../config");
+const { awsAccounts, frameworks, SERVICES } = require("../config");
 
 const createQuestions = {
   awsAccount: `Which AWS account you will be using for prod deployment. \n ${awsAccounts
     .map((i, j) => j + 1 + ". " + i)
-    .join("\n ")} \n`,
+    .join("\n ")} \n\n Please enter the number. \n\n`,
   clusterName:
     "Please provide the name of the cluster to which the service will be deployed. \n",
   namespace: `Please provide the name of the namespace \n`,
-  framework: `Which framework you'll be choosing for this service? Please provide the number. \n ${frameworks.map((i, j) => j + 1 + ". " + i).join("\n ")} \n`,
-  yn: 'yes or no (y  or n)'
+
 };
 
-const addQuestions = {
-  selectService: "Please select from the following applications to add your service."
+const commonQuestions = {
+  framework: `Choose your framework \n ${frameworks.map((i, j) => j + 1 + ". " + i).join("\n ")} \n\n Please enter the number. \n\n`,
+  yn: 'yes or no (y  or n)'
 }
+
+const addQuestions = {
+  selectService: `Choose the service which you want to add. \n ${SERVICES
+    .map((i, j) => j + 1 + ". " + i)
+    .join("\n ")} \n\n Please enter the number. \n\n`
+}
+
+const mongoQuestions = {
+  organisation: `Choose the mongo organisation in which db is present or needs to be created. \n ${SERVICES
+    .map((i, j) => j + 1 + ". " + i)
+    .join("\n ")} \n\n Please enter the number, press 0 if a new organisation needs to be created. \n\n`,
+
+  project: `Please enter the mongo project in which db is present or needs to be created.`,
+  cluster: 'Please enter the mongo cluster in which db is present or needs to be created',
+  db: 'Please enter the name of the database',
+
+}
+const kafkaQuestions = {}
+const redisQuestions = {}
 
 module.exports = {
   createQuestions,
-  addQuestions
+  addQuestions,
+  commonQuestions,
+  mongoQuestions,
+  kafkaQuestions,
+  redisQuestions,
 };

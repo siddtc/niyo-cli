@@ -1,2 +1,4 @@
 1. Create commands enum;
 2. Move to typescript
+3. Manage file structure for adding services
+

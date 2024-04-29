@@ -1,4 +1,5 @@
 #! /usr/bin/env node
+
 const { repoURL } = require("../config")
 const { runCommand } = require("../utils");
 
@@ -12,7 +13,7 @@ const addGit = async (location, folderName) => {
   console.log("Git repo added successfully..")
 }
 
-const addNestJs = async (location, folderName, framework) => {
+const addNestJs = async (location, folderName) => {
   await runCommand(`cd ${location}/${folderName} && git fetch boilerplate nestjs`)
   await runCommand(`cd ${location}/${folderName} && git merge boilerplate/nestjs`)
   console.log("Added base code successfully..")
