@@ -1,9 +1,19 @@
 const { askQuestion } = require("../utils");
 const { createQuestions } = require("../common");
 const { awsAccounts, frameworks } = require("../config");
-const {buildNestJs} = require("../nestjs-builder")
-
+const {buildProject} = require("../repo-builder")
+const {runCommand} = require("../utils");
+const location = process.cwd();
 let serviceName = null;
+
+const addServiceName = async () => {
+  await runCommand(`cd ${location}/${serviceName} && find . -type f -exec sed -i 's/$ServiceName/${serviceName}/g' {} +`)
+}
+
+const addNamespace = async (namespace)=>{
+  await runCommand(`cd ${location}/${serviceName} && find . -type f -exec sed -i 's/$Namespace/${namespace}/g' {} +`)
+}
+
 let awsAccount = null;
 let namespace = null;
 let clusterName = null;
@@ -18,7 +28,7 @@ const createService = async (sn) => {
 
   console.log("\n Please confirm the following details :- \n");
   console.log("Service Name =>", serviceName);
-  console.log("Aws Account =>", awsAccounts[awsAccount - 1]);
+  console.log("Aws Account =->", awsAccounts[awsAccount - 1]);
   console.log("Cluster Name =>", clusterName);
   console.log("Namespace =>", namespace);
   console.log("Framework =>", frameworks[framework - 1], "\n\n");
@@ -49,20 +59,10 @@ const createService = async (sn) => {
     createService();
   }
 
-  switch (framework) {
-    case "1":
-      await buildNestJs({
-        serviceName,
-      });
-    //   mailCreator.sendCreateDetailsMail()
-      break;
-    case "2":
-        // buildGin({
-        //     serviceName,
+  await buildProject(serviceName, framework);
+  await addServiceName();
+  await addNamespace(namespace);
 
-        // })
-      break;
-  }
 };
 
 module.exports = {
