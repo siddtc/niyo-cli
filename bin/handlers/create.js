@@ -1,8 +1,7 @@
-const { askQuestion } = require("../utils");
+const { askQuestion, runCommand } = require("../utils");
 const { createQuestions } = require("../common");
 const { awsAccounts, frameworks } = require("../config");
-const {buildProject} = require("../repo-builder")
-const {runCommand} = require("../utils");
+const { buildProject } = require("../repo-builder")
 const location = process.cwd();
 let serviceName = null;
 
@@ -10,7 +9,7 @@ const addServiceName = async () => {
   await runCommand(`cd ${location}/${serviceName} && find . -type f -exec sed -i 's/$ServiceName/${serviceName}/g' {} +`)
 }
 
-const addNamespace = async (namespace)=>{
+const addNamespace = async (namespace) => {
   await runCommand(`cd ${location}/${serviceName} && find . -type f -exec sed -i 's/$Namespace/${namespace}/g' {} +`)
 }
 
@@ -28,7 +27,7 @@ const createService = async (sn) => {
 
   console.log("\n Please confirm the following details :- \n");
   console.log("Service Name =>", serviceName);
-  console.log("Aws Account =->", awsAccounts[awsAccount - 1]);
+  console.log("Aws Account =>", awsAccounts[awsAccount - 1]);
   console.log("Cluster Name =>", clusterName);
   console.log("Namespace =>", namespace);
   console.log("Framework =>", frameworks[framework - 1], "\n\n");
@@ -42,27 +41,28 @@ const createService = async (sn) => {
   ) {
     console.log("\n\nNo worries, you can always try again.\n\n");
 
-    if (awsAccount >= awsAccounts.length)
+    if (awsAccount > awsAccounts.length)
       console.log(
         "Also please enter a valid aws Account Number, currently you entered",
         awsAccount,
         "\n\n"
       );
 
-    if (framework >= frameworks.length)
+    if (framework > frameworks.length)
       console.log(
         "Also please enter a valid Framework, currently you entered",
         framework,
         "\n\n"
       );
 
-    createService();
+    createService(serviceName);
   }
 
   await buildProject(serviceName, framework);
   await addServiceName();
   await addNamespace(namespace);
-
+  console.log("Your Repository has been created.")
+  process.exit(1)
 };
 
 module.exports = {

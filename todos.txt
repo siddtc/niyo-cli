@@ -1,0 +1,2 @@
+1. Create commands enum;
+2. Move to typescript

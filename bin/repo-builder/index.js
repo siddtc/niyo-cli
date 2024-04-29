@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 const { repoURL } = require("../config")
-const {runCommand} = require("../utils");
+const { runCommand } = require("../utils");
 
 const createFolder = async (location, folderName) => {
   await runCommand(`cd ${location} && mkdir ${folderName}`);

@@ -18,15 +18,15 @@ figlet("Welcome to niyo-cli", (err, data) => {
     .command("create")
     .description("Set up a new project from scratch.")
     .requiredOption("-s --service-name <name of the service>")
-    .action((opt) => {
+    .action(async (opt) => {
       handlers.createService(opt.serviceName);
     });
 
   program
     .command("add")
     .description("Add Kafka, MongoDb, Redis support to your current repo.")
-    .option("-s --service", "Name of the service which needs to be integrated.")
-    .action((cmd) => {});
+    .option("-s --service", "Name of the service which needs to be integrated (Kafka, MongoDb, Redis)")
+    .action(async (cmd) => {handlers.addService(cmd.serviceName)});
 
   program.parse();
 });

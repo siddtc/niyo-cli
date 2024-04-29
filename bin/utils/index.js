@@ -28,10 +28,10 @@ const runCommand = async (command) => {
         console.error(err);
         process.exit(1);
       } else {
-        console.log(stdout);
+        console.log(stdout, stderr);
+        res(true);
       }
-    });
-    resolve(true);
+    })
   });
 };
 
