@@ -14,8 +14,8 @@ const addGit = async (location, folderName) => {
 }
 
 const addNestJs = async (location, folderName) => {
-  await runCommand(`cd ${location}/${folderName} && git fetch boilerplate nestjs`)
-  await runCommand(`cd ${location}/${folderName} && git merge boilerplate/nestjs`)
+  await runCommand(`cd ${location}/${folderName} && git fetch boilerplate nest`)
+  await runCommand(`cd ${location}/${folderName} && git merge boilerplate/nest`)
   console.log("Added base code successfully..")
 }
 

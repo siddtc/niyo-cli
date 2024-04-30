@@ -8,11 +8,38 @@ const serviceName = location.split("/")[-1];
 let service = null;
 let framework = null;
 
-const kafkaProducerAdder = async () => {
+const kafkaProducerAdder = async (framework) => {
 
+    let branchName = null;
+
+    switch (framework) {
+        case "1":
+            branchName = "nestjs-mongo";
+            break;
+         case "2":
+            branchName = "go-mongo";
+            break
+    }
+
+    await runCommand(`git fetch boilerplate ${framework}-kafka-producer`)
+    await runCommand(`git merge boilerplate/${framework}-kafka-producer`)
 }
 
 const kafkaConsumerAdder = async () => {
+    
+    let branchName = null;
+
+    switch (framework) {
+        case "1":
+            branchName = "nestjs-mongo";
+            break;
+         case "2":
+            branchName = "go-mongo";
+            break
+    }
+
+    await runCommand(`cd ${location}/${serviceName} && git fetch boilerplate ${framework}-kafka-consumer`)
+    await runCommand(`cd ${location}/${serviceName} && git merge boilerplate/${framework}-kafka-consumer`)
 
 }
 
@@ -64,11 +91,7 @@ const addService = async () => {
             await addRedis(framework);
             break;
     }
-
-
-
 }
-
 
 
 module.exports = { addService }
