@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-const { awsAccounts, frameworks, SERVICES } = require("../config");
+const { awsAccounts, frameworks, SERVICES, mongo } = require("../config");
 
 const createQuestions = {
   awsAccount: `Which AWS account you will be using for prod deployment. \n ${awsAccounts
@@ -24,13 +24,13 @@ const addQuestions = {
 }
 
 const mongoQuestions = {
-  organisation: `Choose the mongo organisation in which db is present or needs to be created. \n ${SERVICES
+  organisation: `Choose the mongo organisation in which db is present or needs to be created. \n ${mongo.organisations
     .map((i, j) => j + 1 + ". " + i)
-    .join("\n ")} \n\n Please enter the number, press 0 if a new organisation needs to be created. \n\n`,
+    .join("\n ")} \n\n Please enter the number, press 0 if a new organisation needs to be created \t`,
 
-  project: `Please enter the mongo project in which db is present or needs to be created.`,
-  cluster: 'Please enter the mongo cluster in which db is present or needs to be created',
-  db: 'Please enter the name of the database',
+  project: `Please enter the mongo project in which db is present or needs to be created. press 0 if a new project needs to be created\t`,
+  cluster: 'Please enter the mongo cluster in which db is present or needs to be created, press 0 if a new cluster needs to be created\t',
+  db: 'Please enter the name of the database \t',
 
 }
 const kafkaQuestions = {}

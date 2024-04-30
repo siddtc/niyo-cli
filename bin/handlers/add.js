@@ -38,9 +38,8 @@ const kafkaConsumerAdder = async () => {
             break
     }
 
-    await runCommand(`cd ${location}/${serviceName} && git fetch boilerplate ${framework}-kafka-consumer`)
-    await runCommand(`cd ${location}/${serviceName} && git merge boilerplate/${framework}-kafka-consumer`)
-
+    await runCommand(`git fetch boilerplate ${framework}-kafka-consumer`)
+    await runCommand(`git merge boilerplate/${framework}-kafka-consumer`)
 }
 
 const addMongo = async (framework) => {
