@@ -26,7 +26,7 @@ figlet("Welcome to niyo-cli", (err, data) => {
     .command("add")
     .description("Add Kafka, MongoDb, Redis support to your current repo.")
     .option("-s --service", "Name of the service which needs to be integrated (Kafka, MongoDb, Redis)")
-    .action(async (cmd) => {handlers.addService(cmd.serviceName)});
+    .action(async () => {await handlers.addService()});
 
   program.parse();
 });
